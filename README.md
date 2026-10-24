@@ -1,6 +1,6 @@
 # EXILE
 
-A self-hosted, dark-themed rewriting web proxy (Node 20, Express, undici, cheerio).
+A self-hosted, dark-themed rewriting web proxy (Node 20, Express, undici, cheerio). This project is the web proxy described by the repository as "web proxy for school unblocked".
 
 ## Quick start
     cp .env.example .env     # set EXILE_KEY (and EXILE_PASSWORD to gate the instance)
