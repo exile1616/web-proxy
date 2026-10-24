@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exile</title><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/exile.css"></head>
+<body>
+<main id="home">
+  <h1 class="logo" aria-label="Exile">EXILE</h1>
+  <form class="bar" id="homeForm" role="search">
+    <input id="homeInput" type="text" placeholder="Search or enter a URL" aria-label="Search or enter a URL" autocomplete="off" autofocus>
+    <select id="engine" aria-label="Search engine"><option value="https://duckduckgo.com/?q=">DuckDuckGo</option><option value="https://search.brave.com/search?q=">Brave</option><option value="https://www.google.com/search?q=">Google</option><option value="https://www.bing.com/search?q=">Bing</option></select>
+    <button class="go" type="submit" aria-label="Go">&rarr;</button>
+  </form>
+  <footer>Exile v0.1.0 &middot; <a href="/terms.html">Acceptable Use</a></footer>
+</main>
+<section id="browser" class="hidden">
+  <div class="top">
+    <button id="back" aria-label="Back">&larr;</button><button id="fwd" aria-label="Forward">&rarr;</button>
+    <button id="reload" aria-label="Reload">&#8635;</button><button id="homeBtn" aria-label="Home">&#8962;</button>
+    <input id="addr" type="text" aria-label="Address" autocomplete="off">
+  </div>
+  <div id="progress"></div>
+  <iframe id="view" title="Proxied page" referrerpolicy="no-referrer"></iframe>
+</section>
+<script src="/js/app.js" type="module"></script>
+</body></html>

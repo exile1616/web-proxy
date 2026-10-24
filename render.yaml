@@ -1,0 +1,20 @@
+# Render Blueprint: two services from this repo = two origins (UI + proxied content), both free plan.
+# If Render appends a suffix to either name (name taken), update APP_ORIGIN / CONTENT_ORIGIN on BOTH services.
+services:
+  - type: web
+    name: exile-ui
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars: &env
+      - { key: APP_ORIGIN, value: "https://exile-ui.onrender.com" }
+      - { key: CONTENT_ORIGIN, value: "https://exile-svc.onrender.com" }
+      - { key: TRUST_PROXY, value: "1" }
+      - { key: RATE_LIMIT_PER_MIN, value: "120" }
+      - { key: EXILE_KEY, sync: false }   # you'll be prompted: enter the SAME value for both services
+  - type: web
+    name: exile-svc
+    runtime: docker
+    plan: free
+    healthCheckPath: /healthz
+    envVars: *env
