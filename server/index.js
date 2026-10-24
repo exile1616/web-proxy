@@ -12,6 +12,7 @@ const publicDir = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 
 const APP_HOST = new URL(config.appOrigin).host;
 const CONTENT_HOST = new URL(config.contentOrigin).host;
 const split = APP_HOST !== CONTENT_HOST;
+const onContent = (req) => split && req.headers.host === CONTENT_HOST;
 if (!split) console.warn('[exile] APP_ORIGIN == CONTENT_ORIGIN: proxied pages share the UI origin. Dev only.');
 
 const app = express();
@@ -19,10 +20,14 @@ app.disable('x-powered-by');
 app.set('trust proxy', config.trustProxy);
 app.get('/healthz', (_req, res) => res.type('text').send('ok')); // for load balancers
 app.use(requestLog(config.logRequests));
-app.use(rateLimit({ windowMs: 60_000, limit: config.rateLimit, standardHeaders: true, legacyHeaders: false }));
+app.use(rateLimit({
+  windowMs: 60_000,
+  limit: (req) => onContent(req) ? config.proxyRateLimit : config.rateLimit,
+  standardHeaders: true,
+  legacyHeaders: false,
+}));
 
 // Host routing. Content origin serves ONLY /service/* and the shim; the UI origin never proxies.
-const onContent = (req) => split && req.headers.host === CONTENT_HOST;
 app.use((req, res, next) => {
   if (onContent(req)) {
     if (req.path === '/js/shim.js') return res.sendFile(path.join(publicDir, 'js', 'shim.js'), { maxAge: '1h' });

@@ -5,6 +5,7 @@ export const config = {
   key: process.env.EXILE_KEY || 'exile',
   password: process.env.EXILE_PASSWORD || '',
   rateLimit: Number(process.env.RATE_LIMIT_PER_MIN || 240),
+  proxyRateLimit: Number(process.env.PROXY_RATE_LIMIT_PER_MIN || 1200),
   timeoutMs: Number(process.env.TIMEOUT_MS || 15000),
   maxRewriteBytes: Number(process.env.MAX_REWRITE_BYTES || 20_000_000),
   blocklist: list(process.env.BLOCKLIST),
