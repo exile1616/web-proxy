@@ -11,6 +11,7 @@ services:
       - { key: CONTENT_ORIGIN, value: "https://exile-svc.onrender.com" }
       - { key: TRUST_PROXY, value: "1" }
       - { key: RATE_LIMIT_PER_MIN, value: "120" }
+      - { key: PROXY_RATE_LIMIT_PER_MIN, value: "1200" }
       - { key: EXILE_KEY, sync: false }   # you'll be prompted: enter the SAME value for both services
   - type: web
     name: exile-svc
